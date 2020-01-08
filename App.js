@@ -38,38 +38,6 @@ export default class App extends Component {
    console.log("LATITUDE: "+this.state.location.coords.latitude+"      LONGTITUDE: "+this.state.location.coords.longitude)
   };
 
-
-
-
-
-
-
-
-/*
-  componentWillMount(){
-    this._getLocation();
-  }
-_getLocation = async () =>{
-  const { status } = await Location.requestPermissionsAsync();
-console.log(status);
-  if(status !=='granted'){
-    console.log('Permissions not granted!');
-    this.setState({
-      errorMessage:'Permissions not tranted!',
-    })
-  }
-
-
-
-  const userLocation=await   Location.getLastKnownPositionAsync();
-  console.log(userLocation);
-  this.setState({
-    location:userLocation
-  });
-
-}
-*/
-
 render(){
 
   return (
@@ -78,12 +46,19 @@ render(){
       <Text>Find yourself on the map and track your move!</Text>
       <MapView
           style={{ alignSelf: 'stretch', height: 200 }}
-          region={{ latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
+          region={{ 
+            latitude: this.state.location.coords.latitude, 
+            longitude: this.state.location.coords.longitude,
+             latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
           onRegionChange={this._handleMapRegionChange}
-      coordinate={{latitude:this.state.location.coords.latitude, longitude: this.state.location.coords.longitude}}
-      title="My Marker"
-      description="Some description"
+    >
+     <MapView.Marker
+      coordinate={{latitude: this.state.location.coords.latitude,
+          longitude: this.state.location.coords.longitude,}}
+      title={"You"}
+      description={"You are here!"}
     />
+    </MapView>
           <Text>
           Location: {this.state.locationResult}
         </Text>
